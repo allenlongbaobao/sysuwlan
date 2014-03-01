@@ -9,10 +9,14 @@ initial-services = !->
   #require('./routes/users')(app)
   #require('./routes/weather')(app)
 
+run-forever-services = !->
+  require('./business/wlan')
+
 module.exports =
   start: !->
     configure-server!
     initial-services!
+    run-forever-services!
     app.listen port, !->
       console.log "wether server is listening on #{port}"
 
